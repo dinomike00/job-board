@@ -29,7 +29,7 @@
 <script>
 
 // 🔁 REPLACE WITH YOUR GOOGLE APPS SCRIPT URL
-var projectUrl = 'https://script.google.com/macros/s/AKfycbyekpNtH63OxzDiWc_719wFk9iTFkxSc8Nla9ePalboloE2DD8_i8JLDYfOUfO4341HXw/exec';
+var projectUrl = 'https://script.google.com/macros/s/AKfycbwEcbKUFyuiCQaHdzDXIcTODDvtPLA0j-ms69KBDs-zZQafW0qFcY9qqAIG2bMY-ONAbQ/exec';
 
 var jobs = [];
 var categories = [];
@@ -81,7 +81,9 @@ function showAllJobs() {
 
 function showCategory(category) {
     title = category;
-    let filtered = jobs.filter(j => j.category == category);
+    let filtered = jobs.filter(j => 
+        j.category && j.category.trim().toLowerCase() === category.trim().toLowerCase()
+    );
     outputJobs(filtered);
 }
 
@@ -135,7 +137,7 @@ function toggleMoreInfo(event) {
 
 {{/each}}
 
-{{#unless jobs}}
+{{#unless jobs.length}}
 <p class="p-4 text-center text-muted">No opportunities found</p>
 {{/unless}}
 
